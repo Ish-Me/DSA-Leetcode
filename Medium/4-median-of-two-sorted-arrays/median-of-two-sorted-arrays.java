@@ -7,12 +7,24 @@ class Solution {
         int[] list = new int[m+n];
         int l=0;
         while(i<n && j<m){
+            if(nums1[i]>nums2[j]){
+                list[l]=nums2[j];
+                j++;
+                l++;
+            }
+            else if(nums1[i]<nums2[j]){
+                list[l]=nums1[i];
+                i++;
+                l++;
+            }
+            else{
             list[l]=nums1[i];
             l++;
             list[l]=nums2[j];
             l++;
             i++;
             j++;
+            }
         }
         while(i<n){
             list[l]=nums1[i];
@@ -24,7 +36,6 @@ class Solution {
             j++;
             l++;
         }
-        Arrays.sort(list);
         if(list.length%2 != 0)return list[list.length/2];
         else{
             x = list[list.length/2];
