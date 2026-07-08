@@ -4,26 +4,31 @@ class Solution {
         int m=nums2.length;
         int i=0,j=0;
         double x=0,y=0;
-        ArrayList<Integer> list = new ArrayList<>();
+        int[] list = new int[m+n];
+        int l=0;
         while(i<n && j<m){
-            list.add(nums1[i]);
-            list.add(nums2[j]);
+            list[l]=nums1[i];
+            l++;
+            list[l]=nums2[j];
+            l++;
             i++;
             j++;
         }
         while(i<n){
-            list.add(nums1[i]);
+            list[l]=nums1[i];
             i++;
+            l++;
         }
         while(j<m){
-            list.add(nums2[j]);
+            list[l]=nums2[j];
             j++;
+            l++;
         }
-        Collections.sort(list);
-        if(list.size()%2 != 0)return list.get(list.size()/2);
+        Arrays.sort(list);
+        if(list.length%2 != 0)return list[list.length/2];
         else{
-            x = list.get(list.size()/2);
-            y = list.get(list.size()/2-1);
+            x = list[list.length/2];
+            y = list[list.length/2-1];
             return (x+y)/2;
         }
     }
