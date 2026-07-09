@@ -14,15 +14,27 @@
  * }
  */
 class Solution {
-    int count=0;
     public int countNodes(TreeNode root) {
-        isNode(root);
+    if(root==null)return 0;
+    int left=leftHeight(root);
+    int right=rightHeight(root);
+    if(left == right)return (int)Math.pow(2,left)-1;
+    else return 1+countNodes(root.left)+countNodes(root.right);
+    }
+    public int leftHeight(TreeNode root){
+        int count=0;
+        while(root!=null){
+            count++;
+            root=root.left;
+        }
         return count;
     }
-    public void isNode(TreeNode node){
-        if(node == null)return;
-        isNode(node.left);
-        isNode(node.right);
-        count++;
+    public int rightHeight(TreeNode root){
+        int count=0;
+        while(root!=null){
+            count++;
+            root=root.right;
+        }
+        return count;
     }
 }
