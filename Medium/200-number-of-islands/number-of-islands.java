@@ -1,44 +1,23 @@
 class Solution {
     public int numIslands(char[][] grid) {
-        int n = grid.length;
-        int m = grid[0].length;
-        int count = 0;
-        boolean[][] vis = new boolean[n][m];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (grid[i][j] == '1' && !vis[i][j]) {
-                    count++;
-                    bfs(i, j, vis, grid);
+       int rows = grid.length;
+       int cols = grid[0].length;
+       int cnt = 0;
+       for(int i = 0; i<rows; i++){
+           for(int j = 0; j<cols; j++){
+            if(grid[i][j] == '1'){
+                cnt++;
+                dfs(i, j, grid, rows, cols);
                 }
             }
         }
-        return count;
+       return cnt;
     }
-    public static void bfs(int row, int col, boolean[][] vis, char[][] grid) {
-        int m = grid.length;
-        int n = grid[0].length;
-        Queue<int[]> queue = new LinkedList<>();
-        queue.offer(new int[]{row,col});
-        vis[row][col] = true;
-        //for traversing in all 4 directions
-        int[] dRow = {-1, 0, 1, 0};
-        int[] dCol = {0, 1, 0, -1};
-        while (!queue.isEmpty()) {
-            int[] curr = queue.poll();
-            int r = curr[0];
-            int c = curr[1];
-            for (int i = 0; i < 4; i++) {
-                //Checking for neighbour '1' in all four directions
-                int newRow = r + dRow[i];
-                int newCol = c + dCol[i];
-                if (newRow >= 0 && newRow < m && //Checking boundaries and visited conditions
-                    newCol >= 0 && newCol < n &&
-                    grid[newRow][newCol] == '1' &&
-                    !vis[newRow][newCol]) {
-                    vis[newRow][newCol] = true;
-                    queue.offer(new int[]{newRow, newCol});
-                }
-            }
-    }
+    private void dfs(int row, int col, char[][]grid, int rows, int cols){
+        grid[row][col] = '*';
+        if(row-1 > -1 && grid[row - 1][col] == '1') dfs(row - 1, col, grid, rows, cols);
+        if(row + 1 < rows && grid[row + 1][col] == '1') dfs(row + 1, col, grid, rows, cols);
+        if(col - 1 > -1 && grid[row][col - 1] == '1') dfs(row, col - 1, grid, rows, cols);
+        if(col + 1 < cols && grid[row][col+1] == '1') dfs(row, col + 1, grid, rows ,cols);
     }
 }
