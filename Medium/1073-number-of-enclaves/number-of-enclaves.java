@@ -22,10 +22,10 @@ class Solution {
     }
     private void dfs(int i,int j,int[][] vis,int[][] grid,int n,int m){
         vis[i][j] = 1;
-        if(i+1<n && j<m && i>=0 && j>=0 && grid[i+1][j] == 1 && vis[i+1][j] == 0)dfs(i+1,j,vis,grid,n,m);
-        if(i-1>=0 && j<m && i<n && j>=0 && grid[i-1][j] == 1 && vis[i-1][j] == 0)dfs(i-1,j,vis,grid,n,m);
-        if(i<n && j-1>=0 && i>=0 && j<m && grid[i][j-1] == 1 && vis[i][j-1] == 0)dfs(i,j-1,vis,grid,n,m);
-        if(i<n && j+1<m && i>=0 && j>=0 && grid[i][j+1] == 1 && vis[i][j+1] == 0)dfs(i,j+1,vis,grid,n,m);
+        if(i+1<n && grid[i+1][j] == 1 && vis[i+1][j] == 0)dfs(i+1,j,vis,grid,n,m);
+        if(i-1>=0 && grid[i-1][j] == 1 && vis[i-1][j] == 0)dfs(i-1,j,vis,grid,n,m);
+        if(j-1>=0 && grid[i][j-1] == 1 && vis[i][j-1] == 0)dfs(i,j-1,vis,grid,n,m);
+        if(j+1<m && grid[i][j+1] == 1 && vis[i][j+1] == 0)dfs(i,j+1,vis,grid,n,m);
         return;
     }
 }
