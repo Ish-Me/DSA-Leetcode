@@ -1,13 +1,12 @@
 class Solution {
     public int shortestPathBinaryMatrix(int[][] grid) {
-        if(grid[0][0] == 1)return -1;
-
         int n = grid.length;
-        int m = grid[0].length;
 
-        if(n==1 && m==1 && grid[0][0] == 0)return 1;
+        if(grid[0][0] == 1 || grid[n - 1][n - 1] == 1)return -1;
 
-        int[][] dist = new int[n][m];
+        if(n==1 && grid[0][0] == 0)return 1;
+
+        int[][] dist = new int[n][n];
         for (int i = 0; i < n; i++) {
             Arrays.fill(dist[i], Integer.MAX_VALUE);
         }
@@ -25,9 +24,9 @@ class Solution {
             for (int i = 0; i < 8; i++) {
                 int newr = r + dr[i];
                 int newc = c + dc[i];
-                if (newr >= 0 && newr < n && newc >= 0 && newc < m && grid[newr][newc] == 0 && dis + 1 < dist[newr][newc]) {
+                if (newr >= 0 && newr < n && newc >= 0 && newc < n && grid[newr][newc] == 0 && dis + 1 < dist[newr][newc]) {
                     dist[newr][newc] = dis + 1;  
-                if (newr == n-1 && newc == m-1)
+                if (newr == n-1 && newc == n-1)
                     return dis + 1;
                 q.offer(new int[]{dis + 1, newr, newc});
                 }
