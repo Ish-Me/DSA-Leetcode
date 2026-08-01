@@ -4,6 +4,7 @@ class Solution {
         int m = heights[0].length;
 
         int[][] dist = new int[n][m];
+        if(m==1 && n==1) return 0;
         for (int[] row : dist) {
             Arrays.fill(row, Integer.MAX_VALUE);
         }
@@ -32,6 +33,6 @@ class Solution {
                 }
             }
         }
-        return 0;
+        return -1;
     }
 }
