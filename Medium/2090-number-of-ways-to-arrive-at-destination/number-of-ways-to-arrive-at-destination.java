@@ -1,5 +1,6 @@
 class Solution {
     public int countPaths(int n, int[][] roads) {
+        if(n==1)return 1;
         List<List<int[]>> adj = new ArrayList<>();
         for (int i = 0; i < n; i++){
             adj.add(new ArrayList<>());
@@ -39,6 +40,7 @@ class Solution {
                 }
             }
         }
+        if(dist[n-1] == Long.MAX_VALUE)return -1;
         return ways[n-1];
     }
 }
