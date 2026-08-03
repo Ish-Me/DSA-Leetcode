@@ -9,11 +9,11 @@ class Solution {
             dist[edge[0]][edge[1]] = edge[2];
             dist[edge[1]][edge[0]] = edge[2];
         }
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                for(int k=0;k<n;k++){
-                    if(dist[k][i]==Integer.MAX_VALUE || dist[i][j]==Integer.MAX_VALUE)continue;
-                    dist[j][k]=Math.min(dist[j][k],dist[k][i]+dist[i][j]);
+        for(int via=0;via<n;via++){
+            for(int i=0;i<n;i++){
+                for(int j=0;j<n;j++){
+                    if(dist[i][via]==Integer.MAX_VALUE || dist[via][j]==Integer.MAX_VALUE)continue;
+                    dist[i][j]=Math.min(dist[i][j],dist[i][via]+dist[via][j]);
                 }
             }
         }
