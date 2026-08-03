@@ -6,8 +6,8 @@ class Solution {
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
         pq.offer(new int[]{0, 0});
         int totalCost = 0;
-
-        while (pq.size()!=0) {
+        int visEdge = 0;
+        while (visEdge<n) {
             int[] curr = pq.poll();
 
             int cost = curr[0];
@@ -18,6 +18,7 @@ class Solution {
 
             visited[node] = true;
             totalCost += cost;
+            visEdge++;
 
             for (int next = 0; next < n; next++) {
                     int distance = Math.abs(points[node][0] - points[next][0]) +
