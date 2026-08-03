@@ -21,11 +21,12 @@ class Solution {
             visEdge++;
 
             for (int next = 0; next < n; next++) {
+                if(!visited[next]){
                     int distance = Math.abs(points[node][0] - points[next][0]) +
                                    Math.abs(points[node][1] - points[next][1]);
 
                     pq.offer(new int[]{distance, next});
-                
+                }
             }
         }
 
