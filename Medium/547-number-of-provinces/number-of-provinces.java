@@ -1,29 +1,58 @@
 class Solution {
-    public int findCircleNum(int[][] isConnected) {
-        int V = isConnected.length;
-        int count = 0;
-        int[] vis = new int[V];
-        for (int i = 0; i < V; i++) {
-            if (vis[i] == 0) {
-                count++;
-                bfs(i, vis, isConnected);
+    class DisjointSet {
+        int[] parent;
+        int[] size;
+
+        DisjointSet(int n) {
+            parent = new int[n];
+            size = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                parent[i] = i;
+                size[i] = 1;
+            }
+        } 
+        int findParent(int node) {
+            if (parent[node] == node)
+                return node;
+
+            return parent[node] = findParent(parent[node]);
+        }
+        void unionBySize(int u, int v) {
+            int pu = findParent(u);
+            int pv = findParent(v);
+
+            if (pu == pv)
+                return;
+
+            if (size[pu] < size[pv]) {
+                parent[pu] = pv;
+                size[pv] += size[pu];
+            } else {
+                parent[pv] = pu;
+                size[pu] += size[pv];
             }
         }
-        return count;
     }
-    public static void bfs(int node, int[] vis, int[][] isConnected) {
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(node);
-        vis[node] = 1;
-        while (!queue.isEmpty()) {
-            Integer startingNode = queue.poll();
-            for (int i=0;i<isConnected.length;i++) {
-                if (isConnected[startingNode][i]==1 && vis[i]==0) {
-                    vis[i] = 1;
-                    queue.add(i);
+
+    public int findCircleNum(int[][] isConnected) {
+
+        int n = isConnected.length;
+        DisjointSet ds = new DisjointSet(n);
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (isConnected[i][j] == 1) {
+                    ds.unionBySize(i, j);
                 }
             }
         }
+        int cnt = 0;
+        for (int i = 0; i < n; i++) {
+            if (ds.parent[i] == i)
+                cnt++;
+        }
 
+        return cnt;
     }
 }
