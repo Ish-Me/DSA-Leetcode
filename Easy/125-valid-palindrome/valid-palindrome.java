@@ -8,9 +8,9 @@ class Solution {
             }
         }
 
-        String orginal=sb.toString();
+        String og=sb.toString();
         sb.reverse();
 
-        return sb.toString().equals(orginal);
+        return sb.toString().equals(og);
     }
 }
